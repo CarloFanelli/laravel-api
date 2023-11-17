@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProjectController;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get(
     'projects',
-    function () {
-        return response()->json([
-            'projects' => Project::with('technologies', 'type')->get(),
+    [ProjectController::class, 'projectsApi']
+);
 
-        ]);
-    }
+Route::get(
+    'types',
+    [ProjectController::class, 'typesApi']
+);
+
+Route::get(
+    'technologies',
+    [ProjectController::class, 'technologiesApi']
 );
