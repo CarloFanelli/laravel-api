@@ -34,3 +34,8 @@ Route::get(
     'technologies',
     [ProjectController::class, 'technologiesApi']
 );
+
+Route::get(
+    '/project/{project:slug}',
+    [ProjectController::class, 'singleProject']
+);

@@ -66,7 +66,6 @@
                             <input class="form-check-input me-1" type="checkbox" value="{{ $technology->id }}"
                                 {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}
                                 name="technologies[]">
-
                             {{ $technology->name }}
                         </label>
                     @endforeach

@@ -14,7 +14,7 @@ class ProjectController extends Controller
     {
 
         return response()->json([
-            'projects' => Project::with(['technologies', 'type'])->paginate(7),
+            'projects' => Project::with(['technologies', 'type'])->orderByDesc('id')->paginate(6),
         ]);
     }
 
@@ -32,5 +32,23 @@ class ProjectController extends Controller
         return response()->json([
             'projects' => Technology::with('projects')->get(),
         ]);
+    }
+
+    public function singleProject($slug)
+    {
+
+        $single_project = Project::with(['technologies', 'type'])->where('slug', $slug)->first();
+
+        if ($single_project) {
+            return response()->json([
+                'response' => true,
+                'single_project' => $single_project,
+            ]);
+        } else {
+            return response()->json([
+                'response' => false,
+                'single_project' => 'project not found!',
+            ]);
+        };
     }
 }
